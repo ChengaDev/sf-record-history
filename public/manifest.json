@@ -1,21 +1,18 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "SalesForce record history",
-  "description": "Enables to view sales-force record modifications history",
-  "version": "0.0.1",
+    "name": "SalesForce record history",
+    "description": "Enables to view sales-force record modifications history",
+    "version": "0.0.1",
 
-  "browser_action": {
-    "default_popup": "index.html",
-    "default_title": "OwnBackup extension"
-  },
-  "icons": {
-    "16": "logo192.png",
-    "48": "logo192.png",
-    "128": "logo192.png"
-  },  
-  "permissions": [
-    "tabs",
-    "activeTab"
-  ]
+    "browser_action": {
+        "default_popup": "index.html",
+        "default_title": "OwnBackup extension"
+    },
+    "icons": {
+        "16": "logo.png",
+        "48": "logo.png",
+        "128": "logo.png"
+    },
+    "permissions": ["tabs", "activeTab"]
 }
