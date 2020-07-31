@@ -1,23 +1,27 @@
-import React from 'react';
+/*global chrome*/
+import React, {useState} from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './Styles/App.css';
 
 function App() {
+  const [currentUrl, setCurrentUrl] = useState('');
+
+  chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+      let url = tabs[0].url;
+      // use `url` here inside the callback because it's asynchronous!
+      setCurrentUrl(url);
+  });
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          OwnBackup extension to view SalesForce record
+        </div>
+        <div>
+          {currentUrl}
+        </div>
       </header>
     </div>
   );
