@@ -1,6 +1,6 @@
 /*global chrome*/
 import React, { useState } from 'react';
-import logo from './logo.svg';
+import logo from './logofull.png';
 import './Styles/App.css';
 
 function App() {
