@@ -1,7 +1,8 @@
 /*global chrome*/
 import React, { useState } from 'react';
 import logo from './logofull.png';
-import './Styles/App.css';
+import './styles/App.css';
+import Grid from './Components/Grid';
 
 function App() {
     const [currentUrl, setCurrentUrl] = useState('');
@@ -18,8 +19,9 @@ function App() {
             <header className='App-header'>
                 <img src={logo} className='App-logo' alt='logo' />
                 <div>Backup {backupId} records changes</div>
-                <div>{currentUrl}</div>
+                {/* <div>{currentUrl}</div>                 */}
             </header>
+            <Grid />
         </div>
     );
 }
