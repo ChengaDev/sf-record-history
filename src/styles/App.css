@@ -9,10 +9,10 @@ body {
 }
 
 .App-logo {
-    height: 20vmin;
+    height: 15vmin;
     pointer-events: none;
     margin-bottom: 30px;
-    width: 250px;
+    width: 180px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -35,6 +35,28 @@ body {
 
 .App-link {
     color: #61dafb;
+}
+
+#container {
+    justify-content: center;
+    display: flex;
+}
+
+.arrow {
+    color: white;
+}
+
+.arrow span:hover {
+    color: gray;
+}
+
+.arrow span {
+    font-size: 50px;
+    cursor: pointer;
+}
+
+#title {
+    margin-top: -20px;
 }
 
 @keyframes App-logo-spin {
