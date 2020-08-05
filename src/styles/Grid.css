@@ -1,4 +1,4 @@
-.Rtable {
+    .Rtable {
     min-width: 350px;
     display: -webkit-box;
     display: flex;
@@ -8,6 +8,31 @@
 
 .Rtable-cell.header {
     font-size: 13px !important;
+}
+
+@keyframes backgroundanim {
+    0% { background-color: #5a6673; }
+    50%  { background-color: lightskyblue; }
+    100% { background-color: #5a6673 }
+}
+
+.Rtable-cell.field {
+    cursor: pointer;    
+}
+
+#noResults {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    padding-top: 30px;
+}
+
+
+.backupsGrid .Rtable-cell.field:hover {
+    animation-name: backgroundanim;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
 }
 
 .Rtable-cell {
@@ -22,6 +47,7 @@
     background: #5a6673;
     color: white;
     font-size: 9px;
+    word-break: break-all;
 }
 
 .Rtable-cell > h1,
@@ -49,4 +75,61 @@
 }
 .Rtable--6cols > .Rtable-cell {
     width: 16.6%;
+}
+
+#txtSearch {
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+.button {
+    margin-top: 20px;
+    border-radius: 5px;
+    height: 30px;
+    cursor: pointer;
+    border: none;
+    width: 100px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+#btnCompare {
+    color: white;
+    background-color: cadetblue;
+
+}
+
+#btnCompare:hover {    
+    animation: btnbackgroundanim;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+#btnBack {
+    color: white;
+    background-color: red;
+}
+
+@keyframes btnbackgroundanim {
+    0% { background-color: cadetblue; }
+    50%  { background-color: green; }
+    100% { background-color: cadetblue }
+}
+
+#filters {
+    display: flex;
+    justify-content: space-between;
+}
+
+#filters input, #filters select {
+    width: 150px;    
+}
+
+#filters input {
+    height: 22px;
+}
+
+#filters select {
+    margin-top: 5px;
+    height: 30px;
 }
