@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Grid.css';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import ReactTooltip from "react-tooltip";
 
 const Grid = ({allBackups, backup, onFieldSelection }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -84,8 +86,18 @@ const Grid = ({allBackups, backup, onFieldSelection }) => {
                     return (
                         <>
                             <div onClick={() => onFieldCellClicked(field)} className='Rtable-cell field'>{field.field_name}</div>
-                            <div className='Rtable-cell'>{field.old_value}</div>
-                            <div className='Rtable-cell'>{field.new_value}</div>
+                            <div className='Rtable-cell'>
+                                <CopyToClipboard text={field.old_value}>
+                                    <span data-tip="Click to copy">{field.old_value}</span>
+                                </CopyToClipboard>
+                                <ReactTooltip place="top" type="light" effect="solid"/>
+                            </div>
+                            <div className='Rtable-cell'>
+                                <CopyToClipboard text={field.new_value}>
+                                    <span data-tip="Click to copy">{field.new_value}</span>
+                                </CopyToClipboard>
+                                <ReactTooltip place="top" type="light" effect="solid"/>
+                            </div>
                         </>
                     );
                 })}

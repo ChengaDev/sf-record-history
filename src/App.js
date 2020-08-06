@@ -16,23 +16,35 @@ function App() {
     const [currentPage, setCurrentPage] = useState(0);
     const [dropdownFields, setDropdownFields] = useState([]);
 
-    const backupId = 123123;
-
-    // chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-    //     let url = tabs[0].url;
-    //     // use `url` here inside the callback because it's asynchronous!
-    //     setCurrentUrl(url);
-    // });
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+        let url = tabs[0].url;
+        // use `url` here inside the callback because it's asynchronous!
+        if (!currentUrl || url != currentUrl) {
+            setCurrentUrl(url);
+        }
+    });
 
     useEffect(() => {
-        const fetchData = async() => {
-            setIsFetching(true);
-            const recordHistory = await actions.fetchRecordHistory();
-            setData(recordHistory);
-            setIsFetching(false);
-        };
-        fetchData();
-    },[]);
+        try {
+            if (currentUrl) {
+            const fetchData = async() => {
+                    setIsFetching(true);
+                    // const currentUrl = 'https://cs27.lightning.force.com/lightning/r/Contact/0032200000G5ZZtAAN/view';
+                    console.log(currentUrl);
+                    const urlParts = currentUrl.split('/');
+                    const sobjectName = urlParts[5];
+                    const recordId = urlParts[6];
+                    const recordHistory = await actions.fetchRecordHistory(sobjectName, recordId, 3);
+                    setData(recordHistory);
+                    setIsFetching(false);
+                };
+                fetchData();
+            }  
+        }
+        catch (ex) {
+            setHasError(true);
+        }
+    },[currentUrl]);
 
     const onRightArrowClick = () => {
         if (backups && currentPage === backups.length - 1) {
@@ -65,8 +77,7 @@ function App() {
         <div className='App'>
             <header className='App-header'>
                 <img src={logo} className='App-logo' alt='logo' />
-                {backups && !currentField && <div id='title'>Backup {currentBackup.backup_name} records changes</div>}
-                {/*<div>{currentUrl}</div>*/}
+                {backups && !currentField && <div id='title'>{currentBackup.backup_date}</div>}
             </header>
             
             <div id='container'>
@@ -86,10 +97,10 @@ function App() {
 
                 {currentField && 
                     <div id="selectedRecord">
-                        <div id="fieldNameTitle">Changes for <span id="fieldName">{currentField.field_name}</span>field</div>
+                        <div id="fieldNameTitle">Changes for <span id="fieldName">{currentField.field_name}</span>{' '}field</div>
                         <FieldHistoryGrid fieldName={currentField.field_name} backups={backups} />
                         <div>
-                            <button id="btnCompare" type="button" className="button">Compare</button>
+                            {/* <button id="btnCompare" type="button" className="button">Compare</button> */}
                             <button className="button" id="btnBack" onClick={onBackClick} type="button">Back</button>
                         </div>
                     </div>
