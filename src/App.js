@@ -14,7 +14,6 @@ function App() {
     const [hasError, setHasError] = useState(false);
     const [currentField, setCurrentField] = useState(null);
     const [currentPage, setCurrentPage] = useState(0);
-    const [dropdownFields, setDropdownFields] = useState([]);
 
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
         let url = tabs[0].url;
@@ -35,7 +34,9 @@ function App() {
                     const sobjectName = urlParts[5];
                     const recordId = urlParts[6];
                     const recordHistory = await actions.fetchRecordHistory(sobjectName, recordId, 3);
-                    setData(recordHistory);
+                    if (recordHistory) {
+                        setData(recordHistory.reverse());
+                    }                    
                     setIsFetching(false);
                 };
                 fetchData();
@@ -47,18 +48,18 @@ function App() {
     },[currentUrl]);
 
     const onRightArrowClick = () => {
-        if (backups && currentPage === backups.length - 1) {
-            return;
-        } else {
-            setCurrentPage(currentPage + 1);
-        }
-    };
-    
-    const onLeftArrowClick = () => {
         if (currentPage === 0) {
             return;
         } else {
             setCurrentPage(currentPage - 1);
+        }
+    };
+    
+    const onLeftArrowClick = () => {
+        if (backups && currentPage === backups.length - 1) {
+            return;
+        } else {
+            setCurrentPage(currentPage + 1);
         }
     };
 
@@ -70,6 +71,9 @@ function App() {
         setCurrentField(null);
         setCurrentPage(0);
     };
+
+    const rightArrowClass = `arrow ${currentPage === 0 ? 'disabled' : ''}`;
+    const leftArrowClass = `arrow ${backups && currentPage === (backups.length - 1) ? 'disabled' : ''}`;
 
     const currentBackup = backups ? backups[currentPage] : null;
 
@@ -85,11 +89,11 @@ function App() {
                 {hasError && <div>An error has occured</div>}
                 {!isFetching && backups && !currentField &&
                     <>
-                        <div onClick={onLeftArrowClick} className='arrow'>
+                        <div onClick={onLeftArrowClick} className={leftArrowClass}>
                             <span className='material-icons'>keyboard_arrow_left</span>
                         </div>
                         <BackupsGrid allBackups={backups} onFieldSelection={onFieldSelection} backup={currentBackup} />
-                        <div onClick={onRightArrowClick} className='arrow'>
+                        <div onClick={onRightArrowClick} className={rightArrowClass}>
                             <span className='material-icons'>keyboard_arrow_right</span>
                         </div>
                     </>

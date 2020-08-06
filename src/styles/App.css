@@ -58,10 +58,25 @@ body {
 .arrow {
     color: white;
     margin-top: 50px;
+    cursor: pointer;
+}
+
+.arrow.disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.arrow.disabled span:hover {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.arrow.disabled span {
+    cursor: not-allowed;
 }
 
 .arrow span:hover {
-    color: gray;
+    color: lightsteelblue;
 }
 
 .arrow span {

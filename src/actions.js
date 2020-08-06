@@ -13,7 +13,7 @@ export const fetchRecordHistory = async (sobjectName, recordId, serviceId) => {
         const response = await fetch(`https://dev-oz.own-backup-dev.com/api/v1/services/${serviceId}/sobject/${sobjectName}/fetch_record/${recordId}`, {
             method: 'GET',
             headers: {
-                'X-SESSION-ID': '5a7725c7901a7f336792eb27d553c769'
+                'X-SESSION-ID': '470483630f1c06b9de98a3a1bbeff291'
             }
         });
     
