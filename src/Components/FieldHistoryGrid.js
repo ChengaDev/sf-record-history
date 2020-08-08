@@ -13,7 +13,7 @@ const FieldHistoryGrid = ({fieldName, backups}) => {
             return { backupDate: backup.backup_date, value: relevantField.new_value };
         }
     });
-    valueToDisplay.unshift(firstValue);
+    valueToDisplay.push(firstValue);
 
     return (
         <div className='Rtable Rtable--2cols'>
